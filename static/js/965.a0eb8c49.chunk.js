@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgoit_react_hw_08_phonebook=self.webpackChunkgoit_react_hw_08_phonebook||[]).push([[965],{1965:function(e,c,o){o.r(c),o.d(c,{default:function(){return r}});var t="Home_home_block__z0ACJ",s="Home_home_title__58QDm",a=o(184);var r=function(){return(0,a.jsxs)("div",{className:t,children:[(0,a.jsx)("h1",{className:s,children:"Welcome"}),(0,a.jsx)("img",{src:"https://wallpaperaccess.com/full/2564176.jpg",alt:"Dart Weider"})]})}}}]);
+//# sourceMappingURL=965.a0eb8c49.chunk.js.map
