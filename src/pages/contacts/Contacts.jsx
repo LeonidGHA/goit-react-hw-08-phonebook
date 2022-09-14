@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import FormsPhonebook from 'components/phonebook/forms-phonebook/Forms-phonebook';
@@ -7,8 +7,11 @@ import Loading from 'components/loading/Loading';
 import ListPhonebook from 'components/phonebook/list-phonebook/List-phonebook';
 
 import { getContacts } from 'redux/contacts/contacts-items/contacts-items-operations';
+import { itemsIsLoadingStore } from 'redux/contacts/contacts-items/contacts-items-selector';
+
 function Contacts() {
   const dispatch = useDispatch();
+  const isLoading = useSelector(itemsIsLoadingStore);
 
   useEffect(() => {
     dispatch(getContacts());
@@ -19,8 +22,7 @@ function Contacts() {
       <FormsPhonebook />
       <h2>Contacts</h2>
       <FilterPhonebook />
-      <Loading />
-      <ListPhonebook />
+      {isLoading ? <Loading /> : <ListPhonebook />}
     </>
   );
 }

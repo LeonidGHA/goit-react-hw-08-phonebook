@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Notiflix from 'notiflix';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
@@ -12,46 +13,71 @@ const token = {
   },
 };
 
-export const registration = createAsyncThunk('auth/register', async user => {
-  try {
-    const { data } = await axios.post(`users/signup`, { ...user });
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-});
+export const registration = createAsyncThunk(
+  'auth/register',
+  async (user, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`users/signup`, { ...user });
+      token.set(data.token);
 
-export const logIn = createAsyncThunk('auth/login', async user => {
-  try {
-    const { data } = await axios.post(`users/login`, { ...user });
-    token.set(data.token);
-    // console.log(data);
-    return data;
-  } catch (error) {
-    console.log(error);
+      Notiflix.Notify.success('You have a new Contact');
+      // console.log(data);
+      return data;
+    } catch (error) {
+      const statusErr = error.response.status;
+      if (statusErr === 400) {
+        Notiflix.Notify.failure('user creation error');
+      }
+      if (statusErr === 500) {
+        Notiflix.Notify.warning('server error. try again later');
+      }
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
-export const logOut = createAsyncThunk('auth/logOut', async () => {
-  try {
-    await axios.post('users/logout', async () => {
-      token.unset();
-    });
-  } catch (error) {
-    console.log(error);
+export const logIn = createAsyncThunk(
+  'auth/login',
+  async (user, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`users/login`, { ...user });
+      token.set(data.token);
+      // console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      Notiflix.Notify.failure('Login error');
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
+
+export const logOut = createAsyncThunk(
+  'auth/logOut',
+  async (_, { rejectWithValue }) => {
+    try {
+      await axios.post('users/logout', async () => {
+        token.unset();
+      });
+    } catch (error) {
+      const statusErr = error.response.status;
+      if (statusErr === 500) {
+        Notiflix.Notify.warning('server error. try again later');
+      }
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 export const takeCurrentUser = createAsyncThunk(
   'auth/renoot',
-  async (_, thunkApi) => {
+  async (_, { getState, rejectWithValue }) => {
     // console.log(thunkApi);
     // console.log(thunkApi.getState());
-    const state = thunkApi.getState();
+    const state = getState();
     const localStorToken = state.auth.token;
     if (!localStorToken) {
-      return thunkApi.rejectWithValue();
+      return rejectWithValue();
     }
     token.set(localStorToken);
     try {
@@ -59,7 +85,7 @@ export const takeCurrentUser = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.message);
     }
   }
 );

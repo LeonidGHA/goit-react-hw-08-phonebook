@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
 
 import { postContact } from 'redux/contacts/contacts-items/contacts-items-operations';
-import { itemsListStore } from '../../../redux/contacts/contacts-items/contacts-items-selector';
+import { itemsListStore } from 'redux/contacts/contacts-items/contacts-items-selector';
 
 function FormsPhonebook() {
   const [name, setName] = useState('');

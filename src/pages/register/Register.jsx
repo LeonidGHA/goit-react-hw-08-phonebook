@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import Notiflix from 'notiflix';
 
 import { registration } from '../../redux/auth/auth-operations';
 
@@ -28,7 +27,7 @@ function Register() {
   const onSubmitClick = e => {
     e.preventDefault();
     dispatch(registration({ name, email, password }));
-    Notiflix.Notify.success('You have a new Contact');
+
     reset();
   };
 

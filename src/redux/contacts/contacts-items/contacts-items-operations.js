@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Notiflix from 'notiflix';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
@@ -12,39 +13,69 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 //   },
 // };
 
-export const getContacts = createAsyncThunk('contacts/get', async () => {
-  try {
-    const { data } = await axios.get('contacts');
-    return data;
-  } catch (error) {
-    console.log(error);
+export const getContacts = createAsyncThunk(
+  'contacts/get',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get('contacts');
+      return data;
+    } catch (error) {
+      const statusErr = error.response.status;
+      if (statusErr === 404) {
+        Notiflix.Notify.failure('The user collection does not exist.');
+      }
+      if (statusErr === 500) {
+        Notiflix.Notify.warning('server error. try again later');
+      }
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
-export const postContact = createAsyncThunk('contacts/post', async contact => {
-  try {
-    const { data } = await axios.post('contacts', contact);
-    return data;
-  } catch (error) {
-    console.log(error);
+export const postContact = createAsyncThunk(
+  'contacts/post',
+  async (contact, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('contacts', contact);
+      return data;
+    } catch (error) {
+      const statusErr = error.response.status;
+      if (statusErr === 400) {
+        Notiflix.Notify.failure('User creation error try again.');
+      }
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
-export const deleteContact = createAsyncThunk('contacts/delete', async id => {
-  try {
-    const { data } = await axios.delete(`contacts/${id}`);
-    return data;
-  } catch (error) {
-    console.log(error);
+export const deleteContact = createAsyncThunk(
+  'contacts/delete',
+  async (id, { rejectWithValue }) => {
+    try {
+      await axios.delete(`contacts/${id}`);
+      // console.log(id);
+      return id;
+    } catch (error) {
+      const statusErr = error.response.status;
+      if (statusErr === 404) {
+        Notiflix.Notify.failure('The user collection does not exist.');
+      }
+      if (statusErr === 500) {
+        Notiflix.Notify.warning('server error. try again later');
+      }
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const renameContact = createAsyncThunk(
   'contacts/patch',
-  async ({ id, user }) => {
+  async ({ id, user }, { rejectWithValue }) => {
     try {
       const { data } = await axios.patch(`contacts/${id}`, user);
       return data;
-    } catch (error) {}
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
