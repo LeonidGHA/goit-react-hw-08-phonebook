@@ -1,25 +1,29 @@
-.userMenu_email {
-  margin-right: 20px;
-  color: aquamarine;
-}
-.userMenu_login {
-  margin-right: 20px;
-  color: cornflowerblue;
-}
-.userMenu_btn {
-  width: 70px;
-  padding: 10px 15px;
+.notFound_btn {
+  font-size: 10px;
+  margin-left: 20px;
+  padding: 5px 10px;
   border: none;
   border-radius: 10px;
   transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
 
   &:hover,
   :focus {
-    background-color: salmon;
+    background-color: orangered;
     scale: 1.1;
     box-shadow: rgb(255, 255, 255) 0px 20px 30px -10px;
   }
+}
+
+.notFound_text {
+  display: flex;
+  font-size: 20px;
+  color: white;
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+.notFound_list {
+  list-style: none;
 }

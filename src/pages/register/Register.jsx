@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import css from './Register.module.scss';
+
 import { registration } from '../../redux/auth/auth-operations';
 
 function Register() {
@@ -38,8 +40,9 @@ function Register() {
   };
 
   return (
-    <form onSubmit={onSubmitClick}>
-      <label>
+    <form onSubmit={onSubmitClick} className={css.register_form}>
+      <label className={css.register_label}>
+        Name
         <input
           type="text"
           name="name"
@@ -47,10 +50,12 @@ function Register() {
           required
           placeholder="Kurt Cobain"
           onChange={changeInput}
+          className={css.register_input}
         />
       </label>
 
-      <label>
+      <label className={css.register_label}>
+        Email
         <input
           type="email"
           name="email"
@@ -58,10 +63,12 @@ function Register() {
           placeholder="Email@examle.com"
           required
           onChange={changeInput}
+          className={css.register_input}
         />
       </label>
 
-      <label>
+      <label className={css.register_label}>
+        Password
         <input
           type="password"
           name="password"
@@ -70,10 +77,13 @@ function Register() {
           required
           minLength="7"
           onChange={changeInput}
+          className={css.register_input}
         />
       </label>
 
-      <button type="submit">Register</button>
+      <button type="submit" className={css.register_btn}>
+        Register
+      </button>
     </form>
   );
 }

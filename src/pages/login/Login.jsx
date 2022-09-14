@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
-import { logIn } from '../../redux/auth/auth-operations';
+import css from './Login.module.scss';
+
+import { logIn } from 'redux/auth/auth-operations';
+import { isLoggedInStore } from 'redux/auth/auth-selector';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-
+  const isLogIn = useSelector(isLoggedInStore);
   const changeInput = ({ target: { name, value } }) => {
     switch (name) {
       case 'email':
@@ -29,10 +33,14 @@ function Login() {
     setEmail('');
     setPassword('');
   };
+  if (isLogIn) {
+    return <Navigate to="/Contacts" />;
+  }
 
   return (
-    <form onSubmit={onSubmitClick}>
-      <label>
+    <form onSubmit={onSubmitClick} className={css.login_form}>
+      <label className={css.login_label}>
+        Email
         <input
           type="email"
           name="email"
@@ -40,9 +48,11 @@ function Login() {
           placeholder="Email@examle.com"
           required
           onChange={changeInput}
+          className={css.login_input}
         />
       </label>
-      <label>
+      <label className={css.login_label}>
+        Password
         <input
           type="password"
           name="password"
@@ -51,10 +61,13 @@ function Login() {
           minLength="7"
           required
           onChange={changeInput}
+          className={css.login_input}
         />
       </label>
 
-      <button type="submit">Login</button>
+      <button className={css.login_btn} type="submit">
+        Login
+      </button>
     </form>
   );
 }

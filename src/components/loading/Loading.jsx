@@ -1,5 +1,7 @@
+import css from './Loading.module.scss';
+
 function Loading() {
-  return <div>Loading...</div>;
+  return <div className={css.loading_title}>Loading...</div>;
 }
 
 export default Loading;

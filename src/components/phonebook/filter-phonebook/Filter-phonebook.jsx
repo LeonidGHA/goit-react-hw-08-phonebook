@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import css from './Filter-phonebook.module.scss';
+
 import { getValue } from '../../../redux/contacts/contacts-filter/contacts-filter-slise';
 import { filterPhonebookStore } from '../../../redux/contacts/contacts-filter/contacts-filter-selector';
 function FilterPhonebook() {
@@ -8,7 +10,7 @@ function FilterPhonebook() {
   return (
     <input
       type="text"
-      //   className={css.input}
+      className={css.phoneBook_input}
       name="filter"
       placeholder="Serch Contacts"
       value={filterValue}

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
 
+import css from './Forms-phonebook.module.scss';
+
 import { postContact } from 'redux/contacts/contacts-items/contacts-items-operations';
 import { itemsListStore } from 'redux/contacts/contacts-items/contacts-items-selector';
 
@@ -43,10 +45,10 @@ function FormsPhonebook() {
     setNumber('');
   };
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className={css.phoneBook_form}>
       <label>
         <input
-          //   className={css.input}
+          className={css.phoneBook_input}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -59,7 +61,7 @@ function FormsPhonebook() {
       </label>
       <label>
         <input
-          //   className={css.input}
+          className={css.phoneBook_input}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -70,7 +72,9 @@ function FormsPhonebook() {
           onChange={chngeInput}
         />
       </label>
-      <button type="submit">Add contact</button>
+      <button type="submit" className={css.phoneBook_btn}>
+        Add contact
+      </button>
     </form>
   );
 }

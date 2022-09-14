@@ -1,20 +1,23 @@
 import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 
 import SharedLayout from 'components/sharedLayout/SharedLayout';
-import Home from '../pages/home/Home';
-import Login from 'pages/login/Login';
-import Register from 'pages/register/Register';
-import Contacts from 'pages/contacts/Contacts';
-
 import { takeCurrentUser } from 'redux/auth/auth-operations';
+
+const Home = lazy(() => import('pages/home/Home'));
+const Login = lazy(() => import('pages/login/Login'));
+const Register = lazy(() => import('pages/register/Register'));
+const Contacts = lazy(() => import('pages/contacts/Contacts'));
+const NotFound = lazy(() => import('./not-found/NotFound'));
 
 export const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(takeCurrentUser());
   }, [dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
@@ -22,6 +25,7 @@ export const App = () => {
         <Route path="Login" element={<Login />} />
         <Route path="Register" element={<Register />} />
         <Route path="Contacts" element={<Contacts />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
