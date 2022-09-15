@@ -10,7 +10,7 @@ function UserMenu() {
   const user = useSelector(userStore);
   return (
     <div>
-      <span className={css.userMenu_email}>{user.name}</span>{' '}
+      <span className={css.userMenu_email}>{user.name}</span>
       <span className={css.userMenu_login}>{user.email}</span>
       <button
         type="button"

@@ -72,10 +72,9 @@ export const logOut = createAsyncThunk(
 export const takeCurrentUser = createAsyncThunk(
   'auth/reboot',
   async (_, { getState, rejectWithValue }) => {
-    // console.log(thunkApi);
-    // console.log(thunkApi.getState());
     const state = getState();
     const localStorToken = state.auth.token;
+
     if (!localStorToken) {
       return rejectWithValue(`token is invalid`);
     }

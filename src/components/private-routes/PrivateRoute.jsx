@@ -7,6 +7,7 @@ function PrivateRoute() {
   if (!isLogIn) {
     return <Navigate to="/" />;
   }
+
   return <Outlet />;
 }
 
