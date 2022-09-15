@@ -56,9 +56,9 @@ export const logOut = createAsyncThunk(
   'auth/logOut',
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post('users/logout', async () => {
-        token.unset();
-      });
+      await axios.post('users/logout');
+      token.unset();
+      return;
     } catch (error) {
       const statusErr = error.response.status;
       if (statusErr === 500) {
@@ -70,14 +70,14 @@ export const logOut = createAsyncThunk(
 );
 
 export const takeCurrentUser = createAsyncThunk(
-  'auth/renoot',
+  'auth/reboot',
   async (_, { getState, rejectWithValue }) => {
     // console.log(thunkApi);
     // console.log(thunkApi.getState());
     const state = getState();
     const localStorToken = state.auth.token;
     if (!localStorToken) {
-      return rejectWithValue();
+      return rejectWithValue(`token is invalid`);
     }
     token.set(localStorToken);
     try {

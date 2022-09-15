@@ -34,7 +34,7 @@ function Login() {
     setPassword('');
   };
   if (isLogIn) {
-    return <Navigate to="/Contacts" />;
+    return <Navigate to="Contacts" />;
   }
 
   return (

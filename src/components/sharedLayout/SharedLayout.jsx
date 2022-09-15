@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import css from './SharedLayout.module.scss';
 
 import Loading from 'components/loading/Loading';
-import Container from '../container/container';
+import Container from '../container/Container';
 import UserMenu from 'components/user-menu/User-menu';
 import AuthNav from 'components/auth-nav/AutnNav';
 import { isLoggedInStore } from './../../redux/auth/auth-selector';

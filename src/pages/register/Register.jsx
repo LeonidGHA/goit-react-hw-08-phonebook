@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 import css from './Register.module.scss';
 
 import { registration } from '../../redux/auth/auth-operations';
+import { isLoggedInStore } from 'redux/auth/auth-selector';
 
 function Register() {
   const [name, setName] = useState('');
@@ -11,6 +13,7 @@ function Register() {
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
+  const isLogIn = useSelector(isLoggedInStore);
 
   const changeInput = ({ target: { name, value } }) => {
     console.log(value);
@@ -38,6 +41,10 @@ function Register() {
     setEmail('');
     setPassword('');
   };
+
+  if (isLogIn) {
+    return <Navigate to="Contacts" />;
+  }
 
   return (
     <form onSubmit={onSubmitClick} className={css.register_form}>
