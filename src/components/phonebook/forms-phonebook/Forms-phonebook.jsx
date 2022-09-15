@@ -35,8 +35,8 @@ function FormsPhonebook() {
       reset();
       return;
     }
+    Notiflix.Notify.success(`Added contact, ${name}`);
     dispatch(postContact({ name, number }));
-    Notiflix.Notify.success('You have a new Contact');
     reset();
   };
 

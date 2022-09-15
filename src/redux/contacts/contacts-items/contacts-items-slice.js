@@ -18,6 +18,7 @@ const itemsSlise = createSlice({
   extraReducers: {
     [getContacts.pending]: state => {
       state.isLoading = true;
+      state.error = null;
     },
     [getContacts.fulfilled]: (state, { payload }) => {
       state.itemsList = payload;
@@ -29,6 +30,7 @@ const itemsSlise = createSlice({
     },
     [postContact.pending]: state => {
       state.isLoading = true;
+      state.error = null;
     },
     [postContact.fulfilled]: (state, { payload }) => {
       state.itemsList = [...state.itemsList, payload];
@@ -40,6 +42,7 @@ const itemsSlise = createSlice({
     },
     [deleteContact.pending]: state => {
       state.isLoading = true;
+      state.error = null;
     },
     [deleteContact.fulfilled]: (state, { payload }) => {
       state.itemsList = state.itemsList.filter(el => el.id !== payload);

@@ -20,8 +20,8 @@ export const registration = createAsyncThunk(
       const { data } = await axios.post(`users/signup`, { ...user });
       token.set(data.token);
 
-      Notiflix.Notify.success('You have a new Contact');
-      // console.log(data);
+      Notiflix.Notify.success(`Welcome ${data.user.name} to our site`);
+
       return data;
     } catch (error) {
       const statusErr = error.response.status;
@@ -42,10 +42,10 @@ export const logIn = createAsyncThunk(
     try {
       const { data } = await axios.post(`users/login`, { ...user });
       token.set(data.token);
-      // console.log(data);
+
+      Notiflix.Notify.success(`Welcome back, ${data.user.name}`);
       return data;
     } catch (error) {
-      console.log(error);
       Notiflix.Notify.failure('Login error');
       return rejectWithValue(error.message);
     }

@@ -37,6 +37,8 @@ export const postContact = createAsyncThunk(
   async (contact, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('contacts', contact);
+      console.log(data);
+
       return data;
     } catch (error) {
       const statusErr = error.response.status;
@@ -53,7 +55,7 @@ export const deleteContact = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       await axios.delete(`contacts/${id}`);
-      // console.log(id);
+      Notiflix.Notify.success(`Deleted a contact`);
       return id;
     } catch (error) {
       const statusErr = error.response.status;
