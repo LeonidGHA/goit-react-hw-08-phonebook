@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import css from './SharedLayout.module.scss';
 
 import Loading from 'components/loading/Loading';
-import Container from '../container/Container';
+// import Container from '../container/Container';
 import UserMenu from 'components/user-menu/User-menu';
 import AuthNav from 'components/auth-nav/AutnNav';
 import { isLoggedInStore } from './../../redux/auth/auth-selector';
@@ -13,7 +13,8 @@ import { isLoggedInStore } from './../../redux/auth/auth-selector';
 function SharedLayout() {
   const isLoggedIn = useSelector(isLoggedInStore);
   return (
-    <Container>
+    // <Container>
+    <>
       <header>
         <nav className={css.navigation}>
           <NavLink
@@ -22,7 +23,7 @@ function SharedLayout() {
                 ? `${css.navigationLink} ${css.active}`
                 : `${css.navigationLink}`
             }
-            to="/"
+            to="/Home"
           >
             Home
           </NavLink>
@@ -44,7 +45,8 @@ function SharedLayout() {
       <Suspense fallback={<Loading />}>
         <Outlet />
       </Suspense>
-    </Container>
+    </>
+    // </Container>
   );
 }
 
