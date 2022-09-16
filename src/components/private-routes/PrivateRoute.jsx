@@ -5,7 +5,7 @@ import { isLoggedInStore } from 'redux/auth/auth-selector';
 function PrivateRoute() {
   const isLogIn = useSelector(isLoggedInStore);
   if (!isLogIn) {
-    return <Navigate to="/" />;
+    return <Navigate to="Login" />;
   }
 
   return <Outlet />;
