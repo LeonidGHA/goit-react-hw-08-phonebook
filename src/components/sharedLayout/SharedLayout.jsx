@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import css from './SharedLayout.module.scss';
 
 import Loading from 'components/loading/Loading';
-// import Container from '../container/Container';
+import Container from '../container/Container';
 import UserMenu from 'components/user-menu/User-menu';
 import AuthNav from 'components/auth-nav/AutnNav';
 import { isLoggedInStore } from './../../redux/auth/auth-selector';
@@ -13,40 +13,40 @@ import { isLoggedInStore } from './../../redux/auth/auth-selector';
 function SharedLayout() {
   const isLoggedIn = useSelector(isLoggedInStore);
   return (
-    // <Container>
-    <>
-      <header>
-        <nav className={css.navigation}>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? `${css.navigationLink} ${css.active}`
-                : `${css.navigationLink}`
-            }
-            to="/Home"
-          >
-            Home
-          </NavLink>
-          {isLoggedIn && (
+    <Container>
+      <>
+        <header>
+          <nav className={css.navigation}>
             <NavLink
               className={({ isActive }) =>
                 isActive
                   ? `${css.navigationLink} ${css.active}`
                   : `${css.navigationLink}`
               }
-              to="/Contacts"
+              to="/Home"
             >
-              Contacts
+              Home
             </NavLink>
-          )}
-          {isLoggedIn ? <UserMenu /> : <AuthNav />}
-        </nav>
-      </header>
-      <Suspense fallback={<Loading />}>
-        <Outlet />
-      </Suspense>
-    </>
-    // </Container>
+            {isLoggedIn && (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? `${css.navigationLink} ${css.active}`
+                    : `${css.navigationLink}`
+                }
+                to="/Contacts"
+              >
+                Contacts
+              </NavLink>
+            )}
+            {isLoggedIn ? <UserMenu /> : <AuthNav />}
+          </nav>
+        </header>
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
+      </>
+    </Container>
   );
 }
 
