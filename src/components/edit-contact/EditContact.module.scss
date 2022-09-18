@@ -1,0 +1,77 @@
+.edit_item {
+  margin-bottom: 30px;
+
+  font-size: 30px;
+
+  list-style: none;
+
+  text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+    0px -4px 10px rgba(255, 255, 255, 0.3);
+}
+
+.edit_itemStyle {
+  color: yellowgreen;
+}
+
+.edit_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit_input {
+  width: 400px;
+  height: 20px;
+  padding: 10px;
+  margin-bottom: 40px;
+  border: none;
+  border-radius: 10px;
+
+  font-size: 15px;
+
+  transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  :focus {
+    scale: 1.1;
+    box-shadow: rgb(71, 71, 71) 0px 20px 30px -10px;
+  }
+}
+
+.edit_btnEdit {
+  font-size: 20px;
+  width: 150px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 20px;
+  transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  &:hover,
+  :focus {
+    background-color: lawngreen;
+    scale: 1.1;
+    box-shadow: rgb(71, 71, 71) 0px 20px 30px -10px;
+  }
+}
+
+.edit_btnClose {
+  font-size: 20px;
+  width: 150px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  &:hover,
+  :focus {
+    background-color: crimson;
+    scale: 1.1;
+    box-shadow: rgb(71, 71, 71) 0px 20px 30px -10px;
+  }
+}

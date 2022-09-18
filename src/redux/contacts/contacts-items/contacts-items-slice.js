@@ -4,6 +4,7 @@ import {
   getContacts,
   postContact,
   deleteContact,
+  renameContact,
 } from './contacts-items-operations';
 
 const initialState = {
@@ -49,6 +50,27 @@ const itemsSlise = createSlice({
       state.isLoading = false;
     },
     [deleteContact.rejected]: (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+    },
+    [renameContact.pending]: state => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    [renameContact.fulfilled]: (state, { payload }) => {
+      // state.itemsList = state.itemsList.map(el =>
+      //   el.id === payload.id ? payload : el
+      // );
+
+      state.itemsList = state.itemsList.reduce((prevstate, el) => {
+        if (el.id === payload.id) {
+          return [...prevstate, payload];
+        }
+        return [...prevstate, el];
+      }, []);
+      state.isLoading = false;
+    },
+    [renameContact.rejected]: (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
     },

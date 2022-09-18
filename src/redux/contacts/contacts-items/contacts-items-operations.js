@@ -37,7 +37,7 @@ export const postContact = createAsyncThunk(
   async (contact, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('contacts', contact);
-      console.log(data);
+      // console.log(data);
 
       return data;
     } catch (error) {
@@ -75,8 +75,14 @@ export const renameContact = createAsyncThunk(
   async ({ id, user }, { rejectWithValue }) => {
     try {
       const { data } = await axios.patch(`contacts/${id}`, user);
+
       return data;
     } catch (error) {
+      const statusErr = error.response.status;
+      if (statusErr === 400) {
+        Notiflix.Notify.failure('Contact changes failed, try again.');
+      }
+
       return rejectWithValue(error.message);
     }
   }
